@@ -1,0 +1,26 @@
+intro - splash [HECHO]
+login - registro [HECHO]
+perfil personal [HECHO]
+detalle puntos [HECHO]
+detalle estado [HECHO]
+encontrar amigos (follow users) (2) [HECHO]
+Main feed (todos los chains del mundo) [HECHO]
+recibes invitacion [HECHO]
+notificaciones [HECHO]
+publish screen - confirmation (cuando tu creas un chain) [HECHO]
+invite screen (2) [HECHO]
+camara - upload img (subir foto a un chain) (2) [HECHO]
+find friends [HECHO]
+
+
+top bar [HECHO]
+=======
+	- perfil
+	- notificaciones
+
+
+LEFT GESTURE  => find friends
+RIGHT GESTURE => new chain
+
+
+fc5f63 => fd6487
