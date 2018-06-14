@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.isil.grgrou.hoop_app.FindFriendsActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/layoutToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/gradient">
+
+        <TextView
+            android:id="@+id/txtFindFriends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/lato_regular"
+            android:text="Buscar amigos"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:fontFamily="@font/lato_regular"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:text="Hecho"
+            android:onClick="done" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listUsers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layoutToolbar" />
+</RelativeLayout>
