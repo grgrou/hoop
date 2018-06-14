@@ -9,12 +9,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.isil.grgrou.hoop_app.entity.ListUsers;
 import com.isil.grgrou.hoop_app.util.Const;
-import com.squareup.picasso.Picasso;
+import com.isil.grgrou.hoop_app.util.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,14 +62,14 @@ public class AdapterListUsers extends BaseAdapter {
         final ImageButton btnFollow;
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.item_list_users, parent, false);
+        final View itemView = inflater.inflate(R.layout.item_list_users, parent, false);
 
         txtUsername = itemView.findViewById(R.id.txtUsername);
         imgUser = itemView.findViewById(R.id.imgUser);
         btnFollow = itemView.findViewById(R.id.btnFollow);
 
         txtUsername.setText(items.get(position).getUsername());
-        Picasso.get().load(items.get(position).getUrl()).into(imgUser);
+        Util.setImageWithURL(items.get(position).getUrl(), imgUser);
 
         if (items.get(position).getFollow()) {
             btnFollow.setBackgroundResource(R.drawable.follow_btn_check);
@@ -100,7 +102,24 @@ public class AdapterListUsers extends BaseAdapter {
                     });
                     databaseReference.child(items.get(position).getId()).child("followers").updateChildren(followersMap, new DatabaseReference.CompletionListener() {
                         @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {}
+                        public void onComplete(DatabaseError databaseError, DatabaseReference dbRef) {
+                            databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    // Create Notification
+                                    HashMap<String, Object> notificationMap = new HashMap<>();
+                                    notificationMap.put("username", dataSnapshot.child("username").getValue().toString());
+                                    notificationMap.put("url", dataSnapshot.child("url").getValue().toString());
+                                    notificationMap.put("type", 0);
+
+                                    String pushKey = databaseReference.child(items.get(position).getId()).child("notifications").push().getKey();
+                                    databaseReference.child(items.get(position).getId()).child("notifications").child(pushKey).setValue(notificationMap);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {}
+                            });
+                        }
                     });
 
                     items.get(position).setFollow(true);

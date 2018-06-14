@@ -69,6 +69,19 @@
             android:textColor="#ffc400"
             android:fontFamily="@font/lato_bold"
             android:text="username"/>
+
+        <TextView
+            android:id="@+id/txtBio"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgProfile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:fontFamily="@font/lato_regular"
+            android:text="Edit your bio!"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -127,20 +140,25 @@
                     android:fontFamily="@font/lato_regular"
                     android:text="Me gusta" />
             </RelativeLayout>
+
             <RelativeLayout
+                android:id="@+id/btnViewFollowers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp">
+                android:layout_marginEnd="20dp"
+                android:onClick="viewFollowers">
+
                 <TextView
                     android:id="@+id/txtFollowers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="-5dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="-5dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/museo_sans_rounded_700"
-                    android:textSize="22sp"
-                    android:text="0" />
+                    android:text="0"
+                    android:textSize="22sp" />
+
                 <TextView
                     android:id="@+id/txtFollowersText"
                     android:layout_width="wrap_content"
@@ -150,19 +168,24 @@
                     android:fontFamily="@font/lato_regular"
                     android:text="Seguidores" />
             </RelativeLayout>
+
             <RelativeLayout
+                android:id="@+id/btnViewFollowing"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:onClick="viewFollowing">
+
                 <TextView
                     android:id="@+id/txtFollowing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="-5dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="-5dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/museo_sans_rounded_700"
-                    android:textSize="22sp"
-                    android:text="0" />
+                    android:text="0"
+                    android:textSize="22sp" />
+
                 <TextView
                     android:id="@+id/txtFollowingText"
                     android:layout_width="wrap_content"

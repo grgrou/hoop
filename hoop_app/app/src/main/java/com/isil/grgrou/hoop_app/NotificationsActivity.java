@@ -36,10 +36,10 @@ import java.util.ArrayList;
 
 public class NotificationsActivity extends AppCompatActivity {
 
-    DatabaseReference databaseReference;
+    private DatabaseReference databaseReference;
     private String userId;
 
-    private ListView listNotification;
+    private ListView listNotifications;
     private ArrayList<Notification> notifications = new ArrayList<>();
 
     @Override
@@ -51,34 +51,26 @@ public class NotificationsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userId = intent.getStringExtra("userId");
 
-        // Connect to DB
+        // Show Notifications
         databaseReference = FirebaseDatabase.getInstance().getReference(Const.USER_DATABASE_PATH);
 
-        // Read From the Database
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(userId).child("notifications").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Create Notifications Array
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    if (userId.equals(data.child("receiver_id").getValue())) {
-                        // New Notification
-                        Notification notification = new Notification();
+                    // Save Notification in List
+                    Notification notification = new Notification();
+                    notification.setType(Integer.parseInt(data.child("type").getValue().toString()));
+                    notification.setUsername(data.child("username").getValue().toString());
+                    notification.setUrl(data.child("url").getValue().toString());
+                    notification.setMsg();
 
-                        // Set data
-                        String status = (String) data.child("status").getValue();
-                        String username = (String) data.child("username").getValue();
-
-                        notification.setMsg(status, username);
-
-                        // Add to Notification List
-                        notifications.add(notification);
-                    }
+                    notifications.add(notification);
                 }
-
                 // Show Notifications in ListView
-                //listNotification = findViewById(R.id.);
+                listNotifications = findViewById(R.id.listNotifications);
                 AdapterNotification adapter = new AdapterNotification(getApplicationContext(), notifications);
-                listNotification.setAdapter(adapter);
+                listNotifications.setAdapter(adapter);
             }
 
             @Override
@@ -86,7 +78,7 @@ public class NotificationsActivity extends AppCompatActivity {
         });
     }
 
-    public void backActivity(View view) {
+    public void back(View view) {
         finish();
     }
 }
