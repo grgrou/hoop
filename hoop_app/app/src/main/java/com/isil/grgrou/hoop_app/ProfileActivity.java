@@ -1,6 +1,7 @@
 package com.isil.grgrou.hoop_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -84,6 +85,11 @@ public class ProfileActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getTitle().toString()) {
                     case "Cerrar sesion":
+                        SharedPreferences.Editor editor = getSharedPreferences(Const.USER_DEFAULTS, MODE_PRIVATE).edit();
+                        editor.putString("USERNAME", null);
+                        editor.putString("PASSWORD", null);
+                        editor.apply();
+
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         // Close all activities & go to Login
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

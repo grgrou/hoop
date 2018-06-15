@@ -2,6 +2,7 @@ package com.isil.grgrou.hoop_app;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -86,6 +87,11 @@ public class LoginActivity extends AppCompatActivity {
                             user.setUsername(data.child("username").getValue().toString());
                             user.setPassword(data.child("password").getValue().toString());
 
+                            // Create new session
+                            SharedPreferences.Editor editor = getSharedPreferences(Const.USER_DEFAULTS, MODE_PRIVATE).edit();
+                            editor.putString("USERNAME", username);
+                            editor.putString("PASSWORD", password);
+                            editor.apply();
 
                             // Change Activity
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
