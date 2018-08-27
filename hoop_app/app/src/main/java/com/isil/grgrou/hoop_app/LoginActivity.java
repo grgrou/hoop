@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                             user.setId(data.getKey());
                             user.setUrl(data.child("url").getValue().toString());
                             user.setName(data.child("name").getValue().toString());
+                            user.setBio(data.child("bio").getValue().toString());
                             user.setUsername(data.child("username").getValue().toString());
                             user.setPassword(data.child("password").getValue().toString());
 

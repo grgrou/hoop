@@ -26,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private User user;
 
-    private TextView txtName, txtUsername, txtFollowers, txtFollowing;
+    private TextView txtName, txtUsername, txtFollowers, txtFollowing, txtBio;
     private ImageView imgProfile;
 
     @Override
@@ -39,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         user = (User) intent.getSerializableExtra("userObj");
 
         txtName = findViewById(R.id.txtName);
+        txtBio = findViewById(R.id.txtBio);
         txtUsername = findViewById(R.id.txtUsername);
         txtFollowers = findViewById(R.id.txtFollowers);
         txtFollowing = findViewById(R.id.txtFollowing);
@@ -61,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
                 txtName.setText(user.getName());
+                txtBio.setText(user.getBio());
                 txtUsername.setText(user.getUsername());
                 Util.setImageWithURL(user.getUrl(), imgProfile);
             }
@@ -96,7 +98,9 @@ public class ProfileActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case "Editar perfil":
-                        Util.toast(getApplicationContext(), item.getTitle().toString());
+                        Intent editProfile = new Intent(getApplicationContext(), EditProfileActivity.class);
+                        editProfile.putExtra("userObj", user);
+                        startActivity(editProfile);
                         break;
                 }
                 return true;

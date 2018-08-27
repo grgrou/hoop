@@ -112,6 +112,9 @@ public class RegisterActivity extends AppCompatActivity {
                     // Check if User exists in Database
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         if (username.equals(data.child("username").getValue())) {
+                            // Hide AlertDialog
+                            alertDialog.dismiss();
+
                             Util.toast(getApplicationContext(), "Ya existe una cuenta registrada con ese usuario.");
                             Util.animate(Techniques.Shake, btnRegister, 500);
                             userNotExists = false;
@@ -138,12 +141,15 @@ public class RegisterActivity extends AppCompatActivity {
                                 user.setName(name);
                                 user.setUsername(username);
                                 user.setPassword(password);
+                                user.setBio("edita tu bio!");
 
                                 // Save Info in to Database
                                 databaseReference.child(uploadId).setValue(user);
 
                                 // Display Success Toast Message
                                 Util.toast(getApplicationContext(), "Registro completado.");
+                                // Hide AlertDialog
+                                alertDialog.dismiss();
 
                                 // Back to Login
                                 finish();
@@ -156,11 +162,13 @@ public class RegisterActivity extends AppCompatActivity {
                         });
                     }
                 } else {
+                    // Hide AlertDialog
+                    alertDialog.dismiss();
+
+                    // Failed animation
                     Util.toast(getApplicationContext(), "Hay uno o más campos vacíos.");
                     Util.animate(Techniques.Shake, btnRegister, 500);
                 }
-                // Hide AlertDialog
-                alertDialog.dismiss();
             }
 
             @Override
