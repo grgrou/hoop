@@ -6,11 +6,8 @@
 
 <i>Hoop application for android devices.</i><br>
 
+Social video sharing app
 App in Java - Android Studio
-
-## Screenshots
-
-![mockups - nanamatch (ios)](https://github.com/grgrou/nanamatch/blob/master/mockups%20-%20nanamatch.jpeg)
 
 ## Developers
 
